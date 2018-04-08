@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "resources": [
+    {
+      "resource": "/",
+      "methods": "START|STOP|RESTART"
+    },
+    {
+      "resource": "/info",
+      "methods": "GET"
+    },
+    {
+      "resource": "/status",
+      "methods": "GET"
+    },
+    {
+      "resource": "/databases",
+      "methods": "GET|BACKUP|RESTORE"
+    },
+    {
+      "resource": "/databases/{database}",
+      "methods": "GET|ADD|DELETE|RENAME|MODIFY|IMPORT|EXPORT|BACKUP|RESTORE|ACTIVATE|DEACTIVATE"
+    },
+    {
+      "resource": "/{action}",
+      "methods": "PERFORM"
+    }
+  ],
+  "variables":[
+    {
+      "name": "databases",
+      "pattern": "[a-z0-9][a-z0-9_.]*"
+    }
+  ]
+}

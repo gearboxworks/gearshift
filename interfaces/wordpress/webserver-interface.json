@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "resources": [
+    {
+      "resource": "/",
+      "methods": "START|STOP|RESTART"
+    },
+    {
+      "resource": "/info",
+      "methods": "GET"
+    },
+    {
+      "resource": "/status",
+      "methods": "GET"
+    },
+    {
+      "resource": "/domains",
+      "methods": "GET|RESTART|BACKUP|RESTORE"
+    },
+    {
+      "resource": "/domains/{domain}",
+      "methods": "GET|ADD|DELETE|RENAME|MODIFY|IMPORT|EXPORT|BACKUP|RESTORE|ACTIVATE|DEACTIVATE"
+    },
+    {
+      "resource": "/{action}",
+      "methods": "PERFORM"
+    }
+  ],
+  "variables":[
+    {
+      "name": "domain",
+      "pattern": "[a-z0-9][a-z0-9_.]*"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "resources": [
+    {
+      "resource": "/",
+      "methods": "START|STOP|RESTART"
+    },
+    {
+      "resource": "/info",
+      "methods": "GET"
+    },
+    {
+      "resource": "/status",
+      "methods": "GET"
+    },
+    {
+      "resource": "/keys",
+      "methods": "GET|BACKUP|RESTORE"
+    },
+    {
+      "resource": "/keys/{key}",
+      "methods": "GET|ADD|DELETE|RENAME|MODIFY|IMPORT|EXPORT|BACKUP|RESTORE"
+    },
+    {
+      "resource": "/{action}",
+      "methods": "PERFORM"
+    }
+  ],
+  "variables":[
+    {
+      "name": "keys",
+      "pattern": "[a-z0-9][a-z0-9_.]*"
+    }
+  ]
+}

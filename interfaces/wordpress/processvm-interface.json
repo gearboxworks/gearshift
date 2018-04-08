@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "resources": [
+    {
+      "resource": "/",
+      "methods": "START|STOP|RESTART"
+    },
+    {
+      "resource": "/info",
+      "methods": "GET"
+    },
+    {
+      "resource": "/status",
+      "methods": "GET"
+    },
+    {
+      "resource": "/extensions",
+      "methods": "GET|BACKUP|RESTORE"
+    },
+    {
+      "resource": "/extensions/{extension}",
+      "methods": "GET|INSTALL|UNINSTALL|ADD|DELETE|MODIFY|ACTIVATE|DEACTIVATE"
+    },
+    {
+      "resource": "/{action}",
+      "methods": "PERFORM"
+    }
+  ],
+  "variables":[
+    {
+      "name": "extensions",
+      "pattern": "[a-z0-9][a-z0-9_.]*"
+    }
+  ]
+}
