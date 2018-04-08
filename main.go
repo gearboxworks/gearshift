@@ -41,7 +41,7 @@ func main() {
 
 // RequestHandler handles an HTTP-ish request made to Barnacle server
 func RequestHandler(response http.ResponseWriter, request *http.Request) {
-	var jr *JsonResponse
+	var jr JsonResponse
 	var sc int
 	var errbuf bytes.Buffer
 	var out []byte
@@ -178,38 +178,36 @@ func getFirstChar(s string) byte {
 	return ch
 }
 
-type JsonResponse struct {
+type JsonResponse interface {
+}
+
+type OkJsonResponse struct {
 	Status  string      `json:"status"`
 	Message string      `json:"message"`
 	Body    interface{} `json:"body"`
 }
+type FailJsonResponse struct {
+	Status  string      `json:"status"`
+	Message string      `json:"message"`
+}
 
 // NewJsonResponse() is a constructor for JsonResponse
-func NewJsonResponse(s, m, b string) *JsonResponse {
-	var jr *JsonResponse
+func NewJsonResponse(s, m, b string) JsonResponse {
+	var jr JsonResponse
 	js := new(interface{})
+	json.Unmarshal([]byte(b),&js)
 	if 0 < len(b) {
-		json.Unmarshal([]byte(b), &js)
-		jr = &JsonResponse{
+		jr = &OkJsonResponse{
 			Status:  s,
 			Message: m,
 			Body:    js,
 		}
 	} else {
-		jr = &JsonResponse{
+		jr = &FailJsonResponse{
 			Status:  s,
 			Message: m,
-			Body:    "",
 		}
 	}
 	return jr
 }
 
-func (jr *JsonResponse) toString() (js string) {
-	var err error
-	ba, err := json.Marshal(jr)
-	if err != nil {
-		return ""
-	}
-	return string(ba)
-}
