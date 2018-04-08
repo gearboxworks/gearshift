@@ -76,8 +76,9 @@ func RequestHandler(response http.ResponseWriter, request *http.Request) {
 		jr = NewJsonResponse("ok", "", body)
 	}
 
+	response.Header().Set("Content-Type","application/json")
 	response.WriteHeader(sc)
-	json.NewEncoder(response).Encode(jr)
+	response.Write(jr.ToByteArray())
 
 }
 
@@ -189,6 +190,7 @@ func getFirstChar(s string) byte {
 }
 
 type JsonResponse interface {
+	ToByteArray() []byte
 }
 
 type OkJsonResponse struct {
@@ -221,3 +223,17 @@ func NewJsonResponse(s, m, b string) JsonResponse {
 	return jr
 }
 
+func (jr OkJsonResponse) ToByteArray() []byte {
+	return jsonResponseToByteArray(jr)
+}
+func (jr FailJsonResponse) ToByteArray() []byte {
+	return jsonResponseToByteArray(jr)
+}
+func jsonResponseToByteArray(jr JsonResponse) []byte {
+	var err error
+	ba, err := json.Marshal(jr)
+	if err != nil {
+		return []byte("")
+	}
+	return ba
+}
