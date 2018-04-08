@@ -40,7 +40,7 @@ func RequestHandler(response http.ResponseWriter, request *http.Request) {
 	var errbuf bytes.Buffer
 	var out []byte
 	cm := CommandMapper{
-		requestURI:   request.RequestURI,
+		requestUri:   request.RequestURI,
 		commandsPath: commandsPath,
 		method:       request.Method,
 	}
