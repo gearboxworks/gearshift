@@ -130,6 +130,10 @@ func getCommandFilepath(u string, mp string) (cfp string, err error) {
 	u = "/" + strings.TrimLeft(u, "/")
 	// Split into URL parts
 	up := strings.Split(u, "/")
+	if len(up) == 2 && "" == up[1] {
+		// If the request is a root request give is a root filename
+		up[1] = "<root>"
+	}
 	// Create a filepath fp starting with methodPath mp
 	fp := mp
 	for i := 1; i < len(up); i++ {
