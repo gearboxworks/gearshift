@@ -63,7 +63,13 @@ func RequestHandler(response http.ResponseWriter, request *http.Request) {
 		}
 	}
 	if err != nil {
-		errMsg := strings.Trim( errbuf.String(), "\n")
+		var errMsg string
+		if sc == 404 {
+			errMsg = "The URL path %s is not a valid resource for method %s."
+			errMsg = fmt.Sprintf(errMsg,request.RequestURI,request.Method)
+		} else {
+			errMsg = strings.Trim(errbuf.String(), "\n")
+		}
 		jr = NewJsonResponse("fail", errMsg, "")
 	} else {
 		body := strings.Trim( string(out), "\n")
