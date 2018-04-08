@@ -1,5 +1,6 @@
 {
   "version": "1.0",
+  "interface": "wordpress/dbserver",
   "resources": [
     {
       "resource": "/",
