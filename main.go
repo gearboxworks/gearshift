@@ -8,7 +8,6 @@ import (
 	"os/exec"
 	"strings"
 	"bytes"
-	"github.com/pressboxx/barnacle/barnacle"
 )
 
 var commandsPath string
@@ -36,11 +35,11 @@ func main() {
 
 // RequestHandler handles an HTTP-ish request made to Barnacle server
 func RequestHandler(response http.ResponseWriter, request *http.Request) {
-	var jr barnacle.JsonResponse
+	var jr JsonResponse
 	var sc int
 	var errbuf bytes.Buffer
 	var out []byte
-	cm := barnacle.CommandMapper{
+	cm := CommandMapper{
 		RequestUri:   request.RequestURI,
 		CommandsPath: commandsPath,
 		Method:       request.Method,
@@ -69,17 +68,17 @@ func RequestHandler(response http.ResponseWriter, request *http.Request) {
 		} else {
 			errMsg = strings.Trim(errbuf.String(), "\n")
 		}
-		jr = barnacle.NewFailJsonResponse(errMsg)
+		jr = NewFailJsonResponse(errMsg)
 	} else {
 		body := strings.Trim(string(out), "\n")
-		jr = barnacle.NewOkJsonResponse(body)
+		jr = NewOkJsonResponse(body)
 	}
 	response.Header().Set("Content-Type", "application/json")
 	response.WriteHeader(sc)
 	response.Write(jr.ToByteArray())
 }
 
-func RequestedInterface() *barnacle.Interface {
+func RequestedInterface() *Interface {
 	sbi := os.Args[1]
-	return barnacle.NewInterface(sbi)
+	return NewInterface(sbi)
 }
