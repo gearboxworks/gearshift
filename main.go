@@ -8,6 +8,7 @@ import (
 	"os/exec"
 	"strings"
 	"bytes"
+	"github.com/pressboxx/barnacle/barnacle"
 )
 
 var commandsPath string
@@ -35,14 +36,14 @@ func main() {
 
 // RequestHandler handles an HTTP-ish request made to Barnacle server
 func RequestHandler(response http.ResponseWriter, request *http.Request) {
-	var jr JsonResponse
+	var jr barnacle.JsonResponse
 	var sc int
 	var errbuf bytes.Buffer
 	var out []byte
-	cm := CommandMapper{
-		requestUri:   request.RequestURI,
-		commandsPath: commandsPath,
-		method:       request.Method,
+	cm := barnacle.CommandMapper{
+		RequestUri:   request.RequestURI,
+		CommandsPath: commandsPath,
+		Method:       request.Method,
 	}
 	cfp, err := cm.Filepath()
 	if err != nil {
@@ -68,17 +69,17 @@ func RequestHandler(response http.ResponseWriter, request *http.Request) {
 		} else {
 			errMsg = strings.Trim(errbuf.String(), "\n")
 		}
-		jr = NewJsonResponse("fail", errMsg, "")
+		jr = barnacle.NewFailJsonResponse(errMsg)
 	} else {
 		body := strings.Trim(string(out), "\n")
-		jr = NewJsonResponse("ok", "", body)
+		jr = barnacle.NewOkJsonResponse(body)
 	}
 	response.Header().Set("Content-Type", "application/json")
 	response.WriteHeader(sc)
 	response.Write(jr.ToByteArray())
 }
 
-func RequestedInterface() *BarnacleInterface {
+func RequestedInterface() *barnacle.Interface {
 	sbi := os.Args[1]
-	return NewBarnacleInterface(sbi)
+	return barnacle.NewInterface(sbi)
 }
