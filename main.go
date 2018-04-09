@@ -8,9 +8,6 @@ import (
 	"os/exec"
 	"strings"
 	"bytes"
-	"path/filepath"
-	"errors"
-	"encoding/json"
 )
 
 var commandsPath string
