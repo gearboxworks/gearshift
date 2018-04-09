@@ -40,9 +40,9 @@ func RequestHandler(response http.ResponseWriter, request *http.Request) {
 	var errbuf bytes.Buffer
 	var out []byte
 	cm := CommandMapper{
-		requestUri:   request.RequestURI,
-		commandsPath: commandsPath,
-		method:       request.Method,
+		RequestUri:   request.RequestURI,
+		CommandsPath: commandsPath,
+		Method:       request.Method,
 	}
 	cfp, err := cm.Filepath()
 	if err != nil {
