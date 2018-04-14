@@ -1,4 +1,4 @@
-package main
+package barnacle
 
 import "encoding/json"
 
@@ -16,8 +16,8 @@ func jsonResponseToByteArray(jr JsonResponse) []byte {
 }
 
 type OkJsonResponse struct {
-	Status  string      `json:"status"`
-	Body    interface{} `json:"body"`
+	Status string      `json:"status"`
+	Body   interface{} `json:"body"`
 }
 
 func (jr OkJsonResponse) ToByteArray() []byte {
@@ -35,17 +35,18 @@ func NewOkJsonResponse(b string) JsonResponse {
 }
 
 type FailJsonResponse struct {
-	Status  string      `json:"status"`
-	Message string      `json:"message"`
+	Status  string `json:"status"`
+	Message string `json:"message"`
 }
+
 func (jr FailJsonResponse) ToByteArray() []byte {
 	return jsonResponseToByteArray(jr)
 }
+
 // NewJsonResponse() is a constructor for JsonResponse
 func NewFailJsonResponse(m string) JsonResponse {
 	return &FailJsonResponse{
-		Status: "fail",
+		Status:  "fail",
 		Message: m,
 	}
 }
-

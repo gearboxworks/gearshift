@@ -1,4 +1,4 @@
-package main
+package barnacle
 
 import (
 	"strings"
@@ -43,7 +43,7 @@ func (cm *CommandMapper) Filepath() (cfp string, err error) {
 				// If is error, this will fall through to assign err below
 			} else {
 				for _, file := range files {
-					// Check for a template "variable", e.g. "{domain}"
+					// Check for a template "variable", e.g. "{extension}"
 					if '{' != getFirstChar(file) {
 						continue
 					}
