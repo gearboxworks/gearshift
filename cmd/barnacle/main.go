@@ -5,17 +5,18 @@ package main
 
 import (
 	"fmt"
+	"github.com/gearboxworks/gearshift"
 	"log"
 	"net/http"
 	"os"
-	"github.com/pressboxx/barnacle"
+
 )
 
 func main() {
 	var err error
 	var bi = RequestedInterface()
 	var cp = TrapError(bi.CommandsPath()).(string)
-	var cs = barnacle.NewCommandSet(cp)
+	var cs = gearshift.NewCommandSet(cp)
 	srv := &http.Server{Addr: ":9970"}
 	http.Handle("/", cs.Handler())
 	fmt.Println("Listening on port 9970...")
@@ -37,9 +38,9 @@ func TrapError(v interface{},err error) interface{} {
 	return v
 }
 
-func RequestedInterface() *barnacle.Interface {
+func RequestedInterface() *gearshift.Interface {
 	sbi := os.Args[1]
-	return barnacle.NewInterface(sbi)
+	return gearshift.NewInterface(sbi)
 }
 
 

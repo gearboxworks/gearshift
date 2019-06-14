@@ -1,6 +1,7 @@
 {
+  "schema": "1.0",
+  "interface": "wordpress/processvm",
   "version": "1.0",
-  "interface": "wordpress/cacheserver",
   "resources": [
     {
       "resource": "/",
@@ -15,12 +16,12 @@
       "methods": "GET"
     },
     {
-      "resource": "/keys",
+      "resource": "/extensions",
       "methods": "GET|BACKUP|RESTORE"
     },
     {
-      "resource": "/keys/{key}",
-      "methods": "GET|ADD|DELETE|RENAME|MODIFY|IMPORT|EXPORT|BACKUP|RESTORE"
+      "resource": "/extensions/{extension}",
+      "methods": "GET|INSTALL|UNINSTALL|ADD|DELETE|MODIFY|ACTIVATE|DEACTIVATE"
     },
     {
       "resource": "/{action}",
@@ -29,7 +30,7 @@
   ],
   "variables":[
     {
-      "name": "keys",
+      "name": "extensions",
       "pattern": "[a-z0-9][a-z0-9_.]*"
     }
   ]

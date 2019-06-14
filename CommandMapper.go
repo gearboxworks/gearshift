@@ -1,10 +1,10 @@
-package barnacle
+package gearshift
 
 import (
-	"strings"
-	"path/filepath"
-	"fmt"
 	"errors"
+	"fmt"
+	"path/filepath"
+	"strings"
 )
 
 type CommandMapper struct{
@@ -43,7 +43,7 @@ func (cm *CommandMapper) Filepath() (cfp string, err error) {
 				// If is error, this will fall through to assign err below
 			} else {
 				for _, file := range files {
-					// Check for a template "variable", e.g. "{extension}"
+					// Check for a template "variable", e.g. "{extensions}"
 					if '{' != getFirstChar(file) {
 						continue
 					}

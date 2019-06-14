@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#
+
+domain="$1"
+echo ""$domain info"

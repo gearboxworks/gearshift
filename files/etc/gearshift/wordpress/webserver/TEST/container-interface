@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#
+
+cat <<EOF
+{
+    "output":"debug output goes here"
+}
+EOF

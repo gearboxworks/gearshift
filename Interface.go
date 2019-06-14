@@ -1,8 +1,8 @@
-package barnacle
+package gearshift
 
 import (
-	"strings"
 	"os"
+	"strings"
 )
 
 type Interface struct {
@@ -26,7 +26,7 @@ func (bi Interface) CommandsPath(leaf ...string) (path string, err error) {
 		l = "/" + strings.TrimLeft(leaf[0], "/")
 	}
 	d, err := os.Getwd()
-	return d + "/files/etc/barnacle/" + bi.QualifiedName() + l, err
+	return d + "/files/etc/gearshift/" + bi.QualifiedName() + l, err
 }
 
 func (bi *Interface) parse(sbi string) {

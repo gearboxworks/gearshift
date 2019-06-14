@@ -1,4 +1,4 @@
-package barnacle
+package gearshift
 
 import "encoding/json"
 
@@ -27,7 +27,10 @@ func (jr OkJsonResponse) ToByteArray() []byte {
 // NewJsonResponse() is a constructor for JsonResponse
 func NewOkJsonResponse(b string) JsonResponse {
 	js := new(interface{})
-	json.Unmarshal([]byte(b), &js)
+	err := json.Unmarshal([]byte(b), &js)
+	if err != nil {
+		panic(err)
+	}
 	return &OkJsonResponse{
 		Status: "ok",
 		Body:   js,

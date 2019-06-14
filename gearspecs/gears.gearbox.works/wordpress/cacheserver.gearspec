@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "interface": "wordpress/processvm",
+  "interface": "wordpress/cacheserver",
   "resources": [
     {
       "resource": "/",
@@ -15,12 +15,12 @@
       "methods": "GET"
     },
     {
-      "resource": "/extensions",
+      "resource": "/keys",
       "methods": "GET|BACKUP|RESTORE"
     },
     {
-      "resource": "/extensions/{extension}",
-      "methods": "GET|INSTALL|UNINSTALL|ADD|DELETE|MODIFY|ACTIVATE|DEACTIVATE"
+      "resource": "/keys/{key}",
+      "methods": "GET|ADD|DELETE|RENAME|MODIFY|IMPORT|EXPORT|BACKUP|RESTORE"
     },
     {
       "resource": "/{action}",
@@ -29,8 +29,10 @@
   ],
   "variables":[
     {
-      "name": "extensions",
+      "name": "keys",
       "pattern": "[a-z0-9][a-z0-9_.]*"
     }
   ]
 }
+
+https://gitea.io/en-us/
